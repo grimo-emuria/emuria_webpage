@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile & Links</title>
+  <!-- SNSシェア時の設定（OGP） -->
+  <meta property="og:title" content="Profile & Links">
+  <meta property="og:description" content="SNSや活動リンクのまとめページです。">
+  <meta property="og:type" content="website">
+  
+  <style>
+    /* =========================================
+       テーマカラー設定
+       ========================================= */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --btn-bg: #ffffff;
+      --btn-hover: #edf2f7;
+      --btn-border: #e2e8f0;
+      --disabled-bg: rgba(237, 242, 247, 0.6);
+      --disabled-text: #a0aec0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 40px 24px 32px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    /* サイトタイトル / ヘッダー領域（非ボタンの看板） */
+    .site-header {
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--btn-border);
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      display: block;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #cbd5e0;
+    }
+
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .bio {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* セクション見出し */
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 24px 0 12px;
+    }
+
+    /* リンクボタンのリスト */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: var(--btn-bg);
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--btn-border);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      background: var(--btn-hover);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .link-btn:active {
+      transform: translateY(0);
+    }
+
+    /* 工事中（無効化）ボタンのスタイル */
+    .link-btn.disabled {
+      background: var(--disabled-bg);
+      color: var(--disabled-text);
+      border: 1px dashed #cbd5e0;
+      box-shadow: none;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .badge-wip {
+      font-size: 0.7rem;
+      background: #e2e8f0;
+      color: #718096;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      font-weight: 700;
+    }
+
+    /* ボタン左側のアイコン */
+    .link-icon {
+      position: absolute;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+    }
+
+    .link-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    /* YouTubeアイコンだけ赤くする場合 */
+    .icon-youtube {
+      color: #ff0000;
+    }
+
+    /* フッター */
+    .footer {
+      margin-top: 36px;
+      font-size: 0.75rem;
+      color: var(--text-sub);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <!-- サイトタイトル・プロフィール領域（非ボタン化） -->
+    <header class="site-header">
+      <img src="icon.png" alt="アイコン" class="avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23cbd5e0%22/><text x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%234a5568%22>👤</text></svg>'">
+      
+      <!-- サイトタイトル兼ハンドルネーム -->
+      <h1 class="site-title">エムリアのホーム / HN</h1>
+      
+      <p class="bio">
+        遊戯王／ProjectMoon／バイクが好きです。<br>
+        各種SNS・活動場所へのリンクまとめ。
+      </p>
+    </header>
+
+    <!-- アクティブなSNSリンク -->
+    <div class="section-title">Social & Contents</div>
+    <div class="link-list">
+      <!-- X (旧Twitter) -->
+      <a href="https://x.com/grimo_emuria" target="_blank" rel="noopener noreferrer" class="link-btn">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </span>
+        <span>X (@grimo_emuria)</span>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@grimo-emuria" target="_blank" rel="noopener noreferrer" class="link-btn">
+        <span class="link-icon icon-youtube">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </span>
+        <span>YouTube (@grimo-emuria)</span>
+      </a>
+    </div>
+
+    <!-- 工事中セクション -->
+    <div class="section-title">Under Construction</div>
+    <div class="link-list">
+      <!-- Git (工事中) -->
+      <div class="link-btn disabled">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </span>
+        <span>Git <span class="badge-wip">工事中</span></span>
+      </div>
+
+      <!-- メール (工事中) -->
+      <div class="link-btn disabled">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </span>
+        <span>Contact / Mail <span class="badge-wip">工事中</span></span>
+      </div>
+    </div>
+
+    <footer class="footer">
+      &copy; 2026 Your Site Name
+    </footer>
+  </main>
+
+</body>
+</html>
